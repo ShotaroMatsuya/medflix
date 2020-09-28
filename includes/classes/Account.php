@@ -15,8 +15,29 @@ class Account
         $this->validateUsername($un);
         $this->validateEmails($em, $em2);
         $this->validatePasswords($pw, $pw2);
+
+        if (empty($this->errorArray)) {
+            return $this->insertUserDetails($fn, $ln, $un, $em, $pw); //true or false
+        }
+        return false;
     }
 
+    private function insertUserDetails($fn, $ln, $un, $em, $pw)
+    {
+        $pw = hash("sha512", $pw); //hash化
+
+
+        $query = $this->con->prepare("INSERT INTO users (firstName,lastName,username,email, password) 
+                                    VALUES (:fn,:ln,:un,:em,:pw)");
+        $query->bindValue(":fn", $fn);
+        $query->bindValue(":ln", $ln);
+        $query->bindValue(":un", $un);
+        $query->bindValue(":em", $em);
+        $query->bindValue(":pw", $pw);
+
+
+        return $query->execute(); //executeメソッドの返り値はINSERTが成功した場合にtrue、失敗した場合にはfalse
+    }
 
     private function validateFirstName($fn)
     {
@@ -37,7 +58,7 @@ class Account
             return;
         }
 
-        $query = $this->con->prepare("SELECT * FROM users WHERE username=:un");
+        $query = $this->con->prepare("SELECT * FROM users WHERE username = :un");
         $query->bindValue(":un", $un);
 
         $query->execute();
@@ -52,7 +73,7 @@ class Account
             array_push($this->errorArray, Constants::$emailsDontMatch);
             return;
         }
-        if (filter_var($em, FILTER_VALIDATE_EMAIL)) { //emailの書式をcheckしてくれるphpのビルトイン関数
+        if (!filter_var($em, FILTER_VALIDATE_EMAIL)) { //emailの書式をcheckしてくれるphpのビルトイン関数
             array_push($this->errorArray, Constants::$emailInvalid);
             return;
         }

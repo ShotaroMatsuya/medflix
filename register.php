@@ -16,7 +16,14 @@ if (isset($_POST["submitButton"])) {
     $password = FormSanitizer::sanitizeFormPassword($_POST["password"]);
     $password2 = FormSanitizer::sanitizeFormPassword($_POST["password2"]);
 
-    $account->register($firstName, $lastName, $username, $email, $email2, $password, $password2);
+    $success = $account->register($firstName, $lastName, $username, $email, $email2, $password, $password2); //true or false
+
+    if ($success) {
+        //Store session
+        header("Location: index.php"); //redirect
+
+
+    }
 }
 ?>
 
@@ -29,7 +36,7 @@ if (isset($_POST["submitButton"])) {
 </head>
 
 <body>
-    <div class="singInContainer">
+    <div class="signInContainer">
         <div class="column">
             <div class="header">
                 <img src="assets/images/logo.png" title="Logo" alt="Site logo" />

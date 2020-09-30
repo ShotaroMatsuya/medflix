@@ -21,6 +21,19 @@ class Account
         }
         return false;
     }
+    public function login($un, $pw)
+    {
+        $pw = hash("sha512", $pw); //hash化
+        $query = $this->con->prepare("SELECT * FROM users WHERE username=:un AND password=:pw");
+        $query->bindValue(":un", $un);
+        $query->bindValue(":pw", $pw);
+        $query->execute();
+        if ($query->rowCount() == 1) {
+            return true;
+        }
+        array_push($this->errorArray, Constants::$loginFailed);
+        return false;
+    }
 
     private function insertUserDetails($fn, $ln, $un, $em, $pw)
     {
@@ -34,9 +47,12 @@ class Account
         $query->bindValue(":un", $un);
         $query->bindValue(":em", $em);
         $query->bindValue(":pw", $pw);
-
-
         return $query->execute(); //executeメソッドの返り値はINSERTが成功した場合にtrue、失敗した場合にはfalse
+
+        // データベースのdebug↓
+        // $query->execute();
+        // var_dump($query->errorInfo());
+        // return false;
     }
 
     private function validateFirstName($fn)

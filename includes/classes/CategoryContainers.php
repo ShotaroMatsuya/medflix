@@ -17,26 +17,26 @@ class CategoryContainers
         $html = "<div class='previewCategories'>";
 
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) { //連想配列を返す
-            $html .= $this->getCategoryHtml($row, null, true, true);
+            $html .= $this->getCategoryHtml($row, null, true, true); //すべてのカテゴリーを取得
         }
 
 
         return $html . "</div>";
     }
 
-    private function getCategoryHtml($sqlData, $title, $tvShows, $movies)
+    private function getCategoryHtml($sqlData, $title, $tvShows, $movies) //$sqlDataにはcategoriesテーブルの連想配列がループで次々に代入される
     {
         $categoryId = $sqlData["id"];
         $title = $title == null ? $sqlData["name"] : $title;
-        if ($tvShows && $movies) {
-            $entities = EntityProvider::getEntities($this->con, $category, 30);
-        } else if ($tvShows) {
-            //Get tv show entities
-        } else {
-            //Get movie entities
+        if ($tvShows && $movies) { //どちらの情報も取得したいとき
+            $entities = EntityProvider::getEntities($this->con, $categoryId, 30);
+        } else if ($tvShows) { //tvショーのみ
+
+        } else { //movieのみ
+
         }
 
-        if (sizeof(($entities) == 0)) {
+        if (sizeof($entities) == 0) { //Entityオブジェクトが取得できなかったときはskip
             return;
         }
         $entitiesHtml = "";
@@ -44,10 +44,13 @@ class CategoryContainers
         foreach ($entities as $entity) {
             $entitiesHtml .= $previewProvider->createEntityPreviewSquare($entity);
         }
-        return $entitiesHtml . "<br>";
-
-
-
-        return  $title . "<br>";
+        return "<div class='category'>
+                    <a href='category.php?id=$categoryId'>
+                        <h3>$title</h3>
+                    </a>
+                    <div class='entities'>
+                        $entitiesHtml
+                    </div>
+                </div>";
     }
 }

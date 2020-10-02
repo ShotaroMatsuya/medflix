@@ -1,5 +1,5 @@
 <?php
-class Entity
+class Entity //entityの取得
 {
     private $con;
     private $sqlData;

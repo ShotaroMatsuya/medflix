@@ -11,6 +11,19 @@ body {
   box-sizing: border-box;
 }
 
+h3 {
+  color: #e5e5e5;
+
+}
+
+a h3:hover {
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+
 .wrapper {
   min-width: 1050px;
   min-height: 100%;
@@ -107,6 +120,20 @@ body {
   display: flex;
 }
 
+.previewContainer.small {
+  width: 230px;
+  height: 129px;
+  margin-right: 4px;
+  display: inline-flex;
+}
+
+.previewContainer.small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /*画像がストレッチされなくなる */
+}
+
 .previewOverlay {
   position: absolute;
   width: 100%;
@@ -149,9 +176,23 @@ body {
 
 button i {
   color: inherit;
+  /* 親要素のcolorを引き継ぐ */
 }
 
 .mainDetails button:hover {
   background-color: #e6e6e6;
   color: #000;
+}
+
+.category {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+.entities {
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  /* ソース中の連続する半角スペース、タブ、改行を一つの半角スペースにまとめて表示する。 */
 }

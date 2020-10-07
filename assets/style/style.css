@@ -196,3 +196,16 @@ button i {
   white-space: nowrap;
   /* ソース中の連続する半角スペース、タブ、改行を一つの半角スペースにまとめて表示する。 */
 }
+
+.previewCategories {
+  padding: 0 50px;
+}
+
+.errorBanner {
+  color: #fff;
+  position: absolute;
+  top: 25%;
+  width: 100%;
+  text-align: center;
+  font-size: 18px;
+}

@@ -19,7 +19,7 @@ class Video //videosテーブルからrow情報取得
 
             $this->sqlData = $query->fetch(PDO::FETCH_ASSOC); //連想配列に変える
         }
-        $this->entity = new Entity($con, $this->sqlData["entityId"]); //videosテーブル内のentityIdからEntityオブジェクトを生成
+        $this->entity = new Entity($con, $this->sqlData["entityId"]); //videosテーブル内のentityIdからEntityオブジェクトを生成(thumbnailを取得するためにのちのち必要)
     }
     public function getId()
     {

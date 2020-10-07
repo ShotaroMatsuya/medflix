@@ -36,6 +36,10 @@ class Entity //entityテーブルからrow情報の取得
     {
         return $this->sqlData["preview"];
     }
+    public function getCategoryId()
+    {
+        return $this->sqlData["categoryId"];
+    }
     public function getSeasons()
     {
         $query = $this->con->prepare("SELECT * FROM videos 
@@ -55,7 +59,7 @@ class Entity //entityテーブルからrow情報の取得
                 $videos = array(); //init
             }
             $currentSeason = $row["season"];
-            $video[] = new Video($this->con, $row); //一つのvideoにつきvideoオブジェクトを生成
+            $videos[] = new Video($this->con, $row); //一つのvideoにつきvideoオブジェクトを生成
         }
         if (sizeof($videos) != 0) { //最後のシーズンは
             $seasons[] = new Season($currentSeason, $videos);

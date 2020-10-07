@@ -11,15 +11,16 @@ class SeasonProvider
     }
     public function create($entity)
     {
-        $seasons = $entity->getSeasons(); //すべてのseasonとtv-showが取得されている
+        $seasons = $entity->getSeasons(); //seasonsにはSeasonオブジェクトが配列で格納されている
 
         if (sizeof($seasons) == 0) {
             return;
         }
         $seasonsHtml = "";
+        // echo '<pre>';
 
-        // $videos = $seasons->getVideos()[0];
-        // var_dump($this->createVideoSquare($videos));
+        // var_dump($seasons);
+        // echo '</pre>';
 
         foreach ($seasons as $season) { //$seasonオブジェクトはcurrentSeasonNumとvideoオブジェクトをプロパティとして持っている
 
@@ -50,7 +51,7 @@ class SeasonProvider
                         <div class='contents'>
                             <img src='$thumbnail'>
                             <div class='videoInfo'>
-                                <h4>$name</h4>
+                                <h4>$episodeNumber. $name</h4>
                                 <span>$description</span>
                             </div>
                         </div>

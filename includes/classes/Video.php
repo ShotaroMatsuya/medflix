@@ -13,7 +13,7 @@ class Video //videosテーブルからrow情報取得
         if (is_array($input)) { //$inputが連想配列のとき
             $this->sqlData = $input;
         } else { //$inputがidのみのとき
-            $query = $this->con->prepare("SELECT * FROM entities WHERE id = :id");
+            $query = $this->con->prepare("SELECT * FROM videos WHERE id = :id");
             $query->bindValue(":id", $input);
             $query->execute();
 
@@ -44,5 +44,14 @@ class Video //videosテーブルからrow情報取得
     public function getEpisodeNumber()
     {
         return $this->sqlData["episode"];
+    }
+
+    public function incrementViews()
+    {
+        $query = $this->con->prepare("UPDATE videos SET views=views+1 WHERE id=:id");
+        $query->bindValue(":id", $this->getId());
+
+        $query->execute();
+        // print_r($this->con->errorInfo());
     }
 }

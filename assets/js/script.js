@@ -1,3 +1,8 @@
+$(document).scroll(function(){
+    var isScrolled = $(this).scrollTop() > $(".topBar").height();
+    $(".topBar").toggleClass("scrolled", isScrolled); //第２引数はclassをつける条件をセット
+});
+
 function volumeToggle(button) {
     var muted = $(".previewVideo").prop('muted');
     $('.previewVideo').prop('muted', !muted);
@@ -107,4 +112,17 @@ function setStartTime(videoId, username) { //progressカラムの値をfetchす�
         });
     })
 
+}
+function restartVideo(){
+    $("video")[0].currentTime = 0; //jQueryオブジェクトにindex番号0を指定するとJavascriptオブジェクトへ変換できる
+    $("video")[0].play();
+    $(".upNext").fadeOut();
+
+}
+function watchVideo(videoId){ 
+    window.location.href = "watch.php?id=" +videoId;
+}
+
+function showUpNext(){
+    $(".upNext").fadeIn();
 }

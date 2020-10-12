@@ -45,6 +45,14 @@ class Video //videosテーブルからrow情報取得
     {
         return $this->sqlData["episode"];
     }
+    public function getSeasonNumber()
+    {
+        return $this->sqlData["season"];
+    }
+    public function getEntityId()
+    {
+        return $this->sqlData["entityId"];
+    }
 
     public function incrementViews()
     {
@@ -53,5 +61,41 @@ class Video //videosテーブルからrow情報取得
 
         $query->execute();
         // print_r($this->con->errorInfo());
+    }
+    public function getSeasonAndEpisode()
+    {
+        if ($this->isMovie()) {
+            return;
+        }
+        $season = $this->getSeasonNumber();
+        $episode = $this->getEpisodeNumber();
+
+        return "Season $season, Episode $episode";
+    }
+    public function isMovie()
+    {
+        return $this->sqlData["isMovie"] == 1;
+    }
+    public function isInProgress($username)
+    {
+        $query = $this->con->prepare("SELECT * FROM videoProgress 
+                                    WHERE videoId = :videoId AND username = :username");
+        $query->bindValue(":videoId", $this->getid());
+        $query->bindValue(":username", $username);
+        $query->execute();
+
+        return $query->rowCount() != 0; //progressテーブルにカラムが一つでもあればtrueを返す
+    }
+    public function hasSeen($username)
+    {
+        $query = $this->con->prepare("SELECT * FROM videoProgress 
+                                    WHERE videoId = :videoId AND username = :username
+                                    AND finished=1");
+        $query->bindValue(":videoId", $this->getid());
+        $query->bindValue(":username", $username);
+        $query->execute();
+
+        return $query->rowCount() != 0; //progressテーブルにカラムが一つでもあればtrueを返す
+
     }
 }

@@ -9,6 +9,12 @@ if (!isset($_GET['id'])) {
 // var_dump($_GET["id"]);
 // echo "</pre>";
 
+$user = new User($con, $userLoggedIn);
+if (!$user->getIsSubscribed()) {
+    ErrorMessage::show("your must be subscribed to see this.
+                        <a href='profile.php'>Click here to subscribe</a>");
+}
+
 $video = new Video($con, $_GET["id"]);
 $video->incrementViews();
 $upNextVideo = VideoProvider::getUpNext($con, $video);

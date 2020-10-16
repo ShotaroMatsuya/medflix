@@ -21,8 +21,8 @@ $paymentDefinition = new PaymentDefinition();
 $paymentDefinition->setName('Regular Payments')
     ->setType('REGULAR')
     ->setFrequency('Month')
-    ->setFrequencyInterval('1') //毎月
-    ->setAmount(new Currency(array('value' => 9.99, 'currency' => 'GBP'))); //金額
+    ->setFrequencyInterval('1') //毎月請求
+    ->setAmount(new Currency(array('value' => 9.99, 'currency' => 'GBP'))); //金額と通貨を設定
 
 // Set charge models
 // $chargeModel = new ChargeModel();
@@ -31,15 +31,47 @@ $paymentDefinition->setName('Regular Payments')
 // $paymentDefinition->setChargeModels(array($chargeModel));
 
 $currentUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$returnUrl = str_replace("billing.php", "profile.php", $currentUrl);
+$returnUrl = str_replace("billing.php", "profile.php", $currentUrl); //billing→profileへreplace
 // Set merchant preferences
 $merchantPreferences = new MerchantPreferences();
-$merchantPreferences->setReturnUrl($currentUrl . "?success=true") //
-    ->setCancelUrl('http://localhost:3000/cancel')
+$merchantPreferences->setReturnUrl($returnUrl . "?success=true") //成功したときのpage
+    ->setCancelUrl($returnUrl . "?success=false") //失敗したときのpage
     ->setAutoBillAmount('yes')
     ->setInitialFailAmountAction('CONTINUE')
     ->setMaxFailAttempts('0')
-    ->setSetupFee(new Currency(array('value' => 1, 'currency' => 'USD')));
+    ->setSetupFee(new Currency(array('value' => 9.99, 'currency' => 'GBP')));
 
 $plan->setPaymentDefinitions(array($paymentDefinition));
 $plan->setMerchantPreferences($merchantPreferences);
+
+//create plan
+try {
+    $createdPlan = $plan->create($apiContext);
+
+    try {
+        $patch = new Patch();
+        $value = new PayPalModel('{"state":"ACTIVE"}');
+        $patch->setOp('replace')
+            ->setPath('/')
+            ->setValue($value);
+        $patchRequest = new PatchRequest();
+        $patchRequest->addPatch($patch);
+        $createdPlan->update($patchRequest, $apiContext);
+        $plan = Plan::get($createdPlan->getId(), $apiContext);
+
+        // Output plan id
+        echo $plan->getId();
+    } catch (PayPal\Exception\PayPalConnectionException $ex) {
+        echo $ex->getCode();
+        echo $ex->getData();
+        die($ex);
+    } catch (Exception $ex) {
+        die($ex);
+    }
+} catch (PayPal\Exception\PayPalConnectionException $ex) {
+    echo $ex->getCode();
+    echo $ex->getData();
+    die($ex);
+} catch (Exception $ex) {
+    die($ex);
+}

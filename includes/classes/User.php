@@ -28,4 +28,21 @@ class User //usersテーブルから情報を取得
         return $this->sqlData["isSubscribed"];
         // return true;
     }
+    public function getUsername()
+    {
+        return $this->sqlData["username"];
+    }
+
+    public function setIsSubscribed($value)
+    {
+        $query = $this->con->prepare("UPDATE users SET isSubscribed=:isSubscribed
+                                        WHERE username=:un");
+        $query->bindValue(":isSubscribed", $value); //$valueには0か1が入る
+        $query->bindValue(":un", $this->getUsername());
+        if ($query->execute()) { //updateに成功したら..
+            $this->sqlData["isSubscribed"] = $value; //sqlDataプロパティも更新しておく
+            return true;
+        }
+        return false;
+    }
 }

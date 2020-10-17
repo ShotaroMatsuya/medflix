@@ -58,7 +58,7 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     $token = $_GET['token'];
     $agreement = new \PayPal\Api\Agreement();
 
-    $subscriptionMessage = "<div class='alertError'>Something went wrong!</div>";1
+    $subscriptionMessage = "<div class='alertError'>Something went wrong!</div>";
 
     try {
         // Execute agreement

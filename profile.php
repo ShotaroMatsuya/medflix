@@ -89,10 +89,63 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
 ?>
 
 <div class="settingsContainer column">
+    <div class="historySection">
+        <h2>User History</h2>
+        <h3>ノート作成履歴</h3>
+        <?php
+
+        if ($user->getUserNotes() != null) {
+
+            foreach ($user->getUserNotes() as $note) {
+                $date = $note['createdAt'];
+                $videoId = $note['videoId'];
+                $video = new Video($con, $videoId);
+                $videoTitle = $video->getTitle();
+                echo "<ul class='list-group my-3'>
+                        
+                        <a href='watch.php?id=$videoId' class='list-group-item list-group-item-action p-3 d-flex justify-content-around'>
+                        <span class='lead'>編集日: $date </span> <span class=' text-primary h4'>$videoTitle</span>
+                        </a>
+                       
+                        </ul>";
+            }
+        } else {
+            echo "<h4 class='text-light my-5'>ノートは作成されていません</h4>";
+        }
+        ?>
+        <h3>確認テスト成績</h3>
+        <?php
+        if ($user->getUserExams() != null) {
+            foreach ($user->getUserExams() as $exam) {
+                $date = $exam['createdAt'];
+                $videoId = $exam['videoId'];
+                $score = $exam['score'];
+                $isPassed = $exam['isPassed'] == 1 ? '<i class="far fa-check-circle text-success h3">合格</i>' : '<i class="far fa-times-circle text-danger h3">不合格</i>';
+                $video = new Video($con, $videoId);
+                $videoTitle = $video->getTitle();
+                echo "<ul class='list-group my-3'>
+                        
+                        <a href='watch.php?id=$videoId' class='list-group-item list-group-item-action p-3 d-flex justify-content-between align-items-center'>$isPassed
+                        <span class='lead'>実施日: $date </span> <span class=' text-primary h4'>$videoTitle</span><span class='text-danger'>$score 点/10問</span>
+                        </a>
+                       
+                        </ul>";
+            }
+        } else {
+            echo "<h4 class='text-light my-5'>確認テストの履歴がありません。</h4>";
+        }
+
+        ?>
+
+    </div>
+
+
     <div class="formSection">
         <form method="POST">
 
             <h2>User details</h2>
+
+
             <?php
 
 

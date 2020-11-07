@@ -13,7 +13,6 @@ body {
 
 h3 {
   color: #e5e5e5;
-
 }
 
 a h3:hover {
@@ -22,7 +21,7 @@ a h3:hover {
 
 a {
   text-decoration: none;
-  color:#0654ba;
+  color: #0654ba;
 }
 
 .wrapper {
@@ -146,13 +145,11 @@ a {
   color: #fff;
   font-size: 40px;
   margin: 15px 0;
-
 }
 .previewOverlay .mainDetails h4 {
   color: #fff;
   font-size: 20px;
   margin: 15px 0;
-
 }
 
 .previewOverlay .mainDetails {
@@ -161,7 +158,6 @@ a {
   margin-left: 50px;
   display: flex;
   flex-direction: column;
-
 }
 
 .mainDetails button {
@@ -177,8 +173,6 @@ a {
   margin-bottom: 15px;
   margin-right: 5px;
   cursor: pointer;
-
-
 }
 
 button i {
@@ -229,7 +223,6 @@ button i {
   /* 幅が要素の量に依存する (flexだ余白いっぱいに広がる)*/
   justify-content: center;
   margin-right: 4px;
-
 }
 
 .episodeContainer .contents {
@@ -261,9 +254,10 @@ button i {
 
 .previewCategories.noScroll .category .entities {
   white-space: normal;
-
 }
-
+.watchContainer {
+  position: relative;
+}
 .watchContainer video {
   width: 100%;
 }
@@ -288,131 +282,181 @@ button i {
   background-color: transparent;
   border: none;
 }
-.upNext{
+.upNext {
   height: 100%;
   justify-content: center;
 }
-.upNextContainer button{
-  padding:0;
+.upNextContainer button {
+  padding: 0;
 }
 .upNextContainer h2,
-.upNextContainer h3{
-  color:#fff;
+.upNextContainer h3 {
+  color: #fff;
 }
-.watchNav{
-  z-index:2;
+.watchNav {
+  z-index: 2;
 }
-.seen{
+.seen {
   color: #2ecc71;
-    font-size: 26px;
-    position: absolute;
-    top: 5px;
-    left: 5px;
+  font-size: 26px;
+  position: absolute;
+  top: 5px;
+  left: 5px;
 }
-.topBar{
+.topBar {
   position: fixed;
-    width: 100%;
-    z-index: 1;
-    display: flex;
-    align-items: center;
-    padding: 0 60px;
-    height: 70px;
-    box-sizing: border-box;
-    min-width:1050px;
-  transition:background-color 200ms linear;
-
+  width: 100%;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  padding: 0 60px;
+  height: 70px;
+  box-sizing: border-box;
+  min-width: 1050px;
+  transition: background-color 200ms linear;
 }
-.topBar.scrolled{
+.topBar.scrolled {
   background-color: #141414;
-  transition:background-color 200ms linear;
+  transition: background-color 200ms linear;
 }
-.logoContainer{
-  height:40px;
+.logoContainer {
+  height: 40px;
 }
-.logoContainer img{
+.logoContainer img {
   height: 100%;
 }
-.navLinks{
+.navLinks {
   display: flex;
-    list-style: none;
+  list-style: none;
 }
-.navLinks a{
+.navLinks a {
   color: #fff;
   font-size: 14px;
   margin-left: 20px;
 }
-.rightItems{
+.rightItems {
   text-align: right;
-    flex: 1;
+  flex: 1;
 }
-.rightItems i{
+.rightItems i {
   color: #fff;
   font-size: 20px;
   margin-left: 10px;
 }
-.previewCategories h1{
-  color:#e5e5e5;
+.previewCategories h1 {
+  color: #e5e5e5;
 }
-.textboxContainer{
-  padding:100px 50px;
+.textboxContainer {
+  padding: 100px 50px;
 }
-.searchInput{
+.searchInput {
   height: 50px;
-    width: 600px;
-    border: 1px solid #dedede;
-    background-color: transparent;
-    color: #fff;
-    font-size: 20px;
-    padding: 5px 10px;
-    border-radius: 3px;
+  width: 600px;
+  border: 1px solid #dedede;
+  background-color: transparent;
+  color: #fff;
+  font-size: 20px;
+  padding: 5px 10px;
+  border-radius: 3px;
 }
-.settingsContainer{
+.settingsContainer {
   padding-top: 60px;
   background-color: transparent;
   width: 80%;
   margin-left: auto;
   margin-right: auto;
 }
-.settingsContainer h2{
-  color:#fff;
-  margin-top:0;
-
+.settingsContainer h2,
+.settingsContainer h3 {
+  color: #fff;
+  margin-top: 0;
 }
-.settingsContainer .formSection{
+.settingsContainer .formSection {
   display: flex;
-    flex-direction: column;
-    margin: 20px 0px;
-    border-bottom: 1px solid #dedede;
-    padding-bottom: 20px;
+  flex-direction: column;
+  margin: 20px 0px;
+  border-bottom: 1px solid #dedede;
+  padding-bottom: 20px;
 }
-.settingsContainer form input[type="text"],
-.settingsContainer form input[type="email"],
-.settingsContainer form input[type="password"]{
+.settingsContainer form input[type='text'],
+.settingsContainer form input[type='email'],
+.settingsContainer form input[type='password'] {
   width: 300px;
-    height: 40px;
-    font-size: 15px;
-    margin: 5px 0;
-    border: none;
-    border-radius: 3px;
-    padding: 0 5px;
+  height: 40px;
+  font-size: 15px;
+  margin: 5px 0;
+  border: none;
+  border-radius: 3px;
+  padding: 0 5px;
 }
-.settingsContainer form input[type="submit"]{
+.settingsContainer form input[type='submit'] {
   background-color: #dc1928;
-  width:100px;
-  height:40px;
+  width: 100px;
+  height: 40px;
 }
 .alertSuccess,
-.alertError{
-  margin:10px 0;
+.alertError {
+  margin: 10px 0;
 }
-.alertError{
-  color:#dc1928;
+.alertError {
+  color: #dc1928;
 }
-.alertSuccess{
-  color:#2ecc71;
+.alertSuccess {
+  color: #2ecc71;
 }
-.formSection h3{
+.formSection h3 {
   padding: 0;
-    color: #fff;
-    font-size: 20px;
+  color: #fff;
+  font-size: 20px;
+}
+.note-btn {
+  font-size: 25px;
+}
+.note-section {
+  display: none;
+}
+.note-section button {
+  font-size: 20px;
+}
+.note-section textarea {
+  font-size: 25px;
+}
+
+/* quiz style */
+.q-next {
+  font-size: 1em;
+  background-color: red;
+  width: 300px;
+  margin: 20px 0;
+  padding: 10px;
+  display: none;
+  cursor: pointer;
+}
+
+/* .q-btn {
+  display: inline-block;
+  padding: 5px;
+  font-family: sans-serif;
+  border-radius: 10px;
+  font-size: 1.5em;
+  margin-right: 10px;
+  cursor: pointer;
+} */
+
+.q-answer {
+  border: 1px solid #ddd;
+}
+
+.q-answer:hover {
+  background-color: beige;
+  border: 1px solid red;
+}
+
+.q-question {
+  display: block;
+  font-size: 2em;
+  margin-bottom: 20px;
+}
+.message {
+  color: black;
 }

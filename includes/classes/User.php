@@ -45,4 +45,27 @@ class User //usersテーブルから情報を取得
         }
         return false;
     }
+    public function getUserNotes()
+    {
+        $query = $this->con->prepare("SELECT * FROM notes where username=:un ORDER BY createdAt DESC LIMIT 5");
+        $query->bindValue(":un", $this->getUsername());
+        $query->execute();
+
+        $noteLists = array();
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $noteLists[] = $row;
+        }
+        return $noteLists;
+    }
+    public function getUserExams()
+    {
+        $query = $this->con->prepare("SELECT * FROM exams where username=:un ORDER BY createdAt DESC LIMIT 5");
+        $query->bindValue(":un", $this->getUsername());
+        $query->execute();
+        $examLists = array();
+        while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            $examLists[] = $row;
+        }
+        return $examLists;
+    }
 }

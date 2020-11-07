@@ -4,6 +4,8 @@ require_once("billingPlan.php"); //このファイルから発行されたplanId
 
 $id = $plan->getId();
 
+
+
 use PayPal\Api\Agreement;
 use PayPal\Api\Payer;
 use PayPal\Api\Plan;
@@ -40,6 +42,7 @@ try {
 
     // Extract approval URL to redirect user
     $approvalUrl = $agreement->getApprovalLink();
+    echo $approvalUrl;
     header("Location: $approvalUrl");
 } catch (PayPal\Exception\PayPalConnectionException $ex) {
     echo $ex->getCode();

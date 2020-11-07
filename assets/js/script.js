@@ -126,3 +126,80 @@ function watchVideo(videoId){
 function showUpNext(){
     $(".upNext").fadeIn();
 }
+
+function initNote(videoId, username){
+    getNote(videoId, username);
+    
+    $('#note').on('click',function(){
+        $('.note-section').slideToggle(500);
+    });
+  
+    $('#noteBtn').on('click',function(){
+        
+        updateNotes(videoId, username);
+    });
+    $('#deleteBtn').on('click',function(){
+        removeNote(videoId,username);
+    });
+   
+}
+
+function updateNotes(videoId, username){
+    var currentContent = $('.note-section #content').val();
+
+    //作成
+    if(storedContent == currentContent){
+        alert('ノートの変更がありません。');
+        return ;
+    }
+    addNote(videoId, username,currentContent);
+
+}
+var storedContent = "";
+function getNote(videoId, username){
+    $.post('ajax/getNote.php',{videoId:videoId,username:username},function(data){
+        if (typeof data === 'string') { //エラーメッセージが返ってきたらtrueになる
+            alert(data);
+            return;
+        }
+        storedContent = data.content;
+
+
+         $('.note-section #content').val(storedContent); 
+        if(storedContent != null){
+            $('#note').html('ノートを確認する');
+            
+            
+        }else{
+            $('#note').html('ノートを新しく作成する');
+        }
+         });
+        
+}
+function addNote(videoId, username,content){
+ $.post('ajax/addNote.php',{videoId:videoId,username:username,content:content},function(data){
+    if (data !== null && data !== "") {
+        alert(data);
+    }else{
+        alert('ノートが保存されました！！');
+    }
+ });
+}
+function removeNote(videoId, username){
+    var currentContent = $('.note-section #content').val();
+    if(currentContent == ""){
+        return ;
+    }
+    if(confirm('本当に削除してよろしいですか？')){
+        $.post('ajax/removeNote.php',{videoId:videoId,username:username},function(data){
+            if (data !== null && data !== "") {
+                alert(data);
+            }else{
+                alert('ノートが削除されました！！');
+                
+                $('.note-section #content').val('');
+                $('.note-section').slideToggle(500);
+            }});
+
+    }
+}

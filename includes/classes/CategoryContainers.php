@@ -29,7 +29,7 @@ class CategoryContainers
         $query->execute();
 
         $html = "<div class='previewCategories'>
-                    <h1>TV Shows</h1>";
+                    <h1>講義動画</h1>";
 
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) { //連想配列を返す
             $html .= $this->getCategoryHtml($row, null, true, false); //TVカテゴリーのみを取得
@@ -44,7 +44,7 @@ class CategoryContainers
         $query->execute();
 
         $html = "<div class='previewCategories'>
-                    <h1>Movies</h1>";
+                    <h1>実践動画</h1>";
 
         while ($row = $query->fetch(PDO::FETCH_ASSOC)) { //連想配列を返す
             $html .= $this->getCategoryHtml($row, null, false, true); //Movieカテゴリーのみを取得

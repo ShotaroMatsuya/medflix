@@ -83,7 +83,7 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     }
 } else if (isset($_GET['success']) && $_GET['success'] == 'false') {
     $subscriptionMessage = "<div class='alertError'>
-                            User cancelled or something went wrong!
+                            キャンセルされたか、何らかの問題が発生しました
                         </div>";
 }
 ?>
@@ -167,7 +167,7 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
     </div>
     <div class="formSection">
         <form method="POST">
-            <h2>Update password</h2>
+            <h2>Passwordを変更</h2>
             <input type="password" name="oldPassword" placeholder="Old password">
             <input type="password" name="newPassword" placeholder="New password">
             <input type="password" name="newPassword2" placeholder="Confirm password">
@@ -181,15 +181,15 @@ if (isset($_GET['success']) && $_GET['success'] == 'true') {
 
     </div>
     <div class="formSection">
-        <h2>Subscription</h2>
+        <h2>定期購読</h2>
         <div class="message">
             <?php echo $subscriptionMessage; ?>
         </div>
         <?php
         if ($user->getIsSubscribed()) {
-            echo "<h3>You are subscribed! Go to PayPal to cancel.</h3>";
+            echo "<h3>あなたは定期購読しています! 解約する場合はpaypalのマイページでキャンセルしてください。.</h3>";
         } else {
-            echo "<a href='billing.php'>Subscribe to Reeceflix</a>";
+            echo "<a href='billing.php'>Medflixに加入する！</a>";
         }
 
         ?>

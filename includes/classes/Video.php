@@ -70,7 +70,7 @@ class Video //videosテーブルからrow情報取得
         $season = $this->getSeasonNumber();
         $episode = $this->getEpisodeNumber();
 
-        return "Season $season, Episode $episode";
+        return "第 $season 章  ( $episode 限目)";
     }
     public function isMovie()
     {

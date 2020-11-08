@@ -12,17 +12,17 @@ use PayPal\Common\PayPalModel;
 
 // Create a new billing plan
 $plan = new Plan();
-$plan->setName('Reeceflix monthly subscription')
-    ->setDescription('Gets you all the features of our site.')
+$plan->setName('Medflix 定額プラン')
+    ->setDescription('すべての動画への視聴権を取得できます。')
     ->setType('INFINITE'); //cancelするまでずっと請求
 
 // Set billing plan definitions
 $paymentDefinition = new PaymentDefinition();
-$paymentDefinition->setName('Regular Payments')
+$paymentDefinition->setName('レギュラープラン')
     ->setType('REGULAR')
     ->setFrequency('Month')
     ->setFrequencyInterval('1') //毎月請求
-    ->setAmount(new Currency(array('value' => 9.99, 'currency' => 'GBP'))); //金額と通貨を設定
+    ->setAmount(new Currency(array('value' =>   1, 000, 'currency' => 'JPY'))); //金額と通貨を設定
 
 // Set charge models
 // $chargeModel = new ChargeModel();
@@ -39,7 +39,7 @@ $merchantPreferences->setReturnUrl($returnUrl . "?success=true") //成功した�
     ->setAutoBillAmount('yes')
     ->setInitialFailAmountAction('CONTINUE')
     ->setMaxFailAttempts('0')
-    ->setSetupFee(new Currency(array('value' => 9.99, 'currency' => 'GBP')));
+    ->setSetupFee(new Currency(array('value' => 1, 000, 'currency' => 'JPY')));
 
 $plan->setPaymentDefinitions(array($paymentDefinition));
 $plan->setMerchantPreferences($merchantPreferences);

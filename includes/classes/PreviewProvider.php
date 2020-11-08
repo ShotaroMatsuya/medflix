@@ -13,7 +13,7 @@ class PreviewProvider //preview画面とvideoリストのdom構成
     {
         $entitiesArray = EntityProvider::getEntities($this->con, $categoryId, 1); //指定されたカテゴリからランダムで1つのentityを取得
         if (sizeof($entitiesArray) == 0) {
-            ErrorMessage::show("No TV shows to display");
+            ErrorMessage::show("表示する講義動画がありませんでした。");
         }
         return $this->createPreviewVideo($entitiesArray[0]);
     }
@@ -21,7 +21,7 @@ class PreviewProvider //preview画面とvideoリストのdom構成
     {
         $entitiesArray = EntityProvider::getTVShowEntities($this->con, null, 1); //カテゴリ未指定でランダムで1つのentityを取得
         if (sizeof($entitiesArray) == 0) {
-            ErrorMessage::show("No TV shows to display");
+            ErrorMessage::show("表示する講義動画がありませんでした。");
         }
         return $this->createPreviewVideo($entitiesArray[0]);
     }
@@ -29,7 +29,7 @@ class PreviewProvider //preview画面とvideoリストのdom構成
     {
         $entitiesArray = EntityProvider::getMoviesEntities($this->con, null, 1); //カテゴリ未指定でランダムで1つのentityを取得
         if (sizeof($entitiesArray) == 0) {
-            ErrorMessage::show("No movies to display");
+            ErrorMessage::show("表示する実践動画がありませんでした。");
         }
         return $this->createPreviewVideo($entitiesArray[0]);
     }
@@ -47,15 +47,15 @@ class PreviewProvider //preview画面とvideoリストのdom構成
         $video = new Video($this->con, $videoId);
 
         $isProgress = $video->isInProgress($this->username);
-        $playButtonText = $isProgress ? "Continue watching" : "Play";
+        $playButtonText = $isProgress ? "視聴する" : "Play";
         $seasonEpisode = $video->getSeasonAndEpisode();
         $subHeading = $video->isMovie() ? "" : "<h4>$seasonEpisode</h4>";
 
 
 
         return "<div class='previewContainer'>
-                    <img src='$thumbnail' class='previewImage' hidden>
-                    <video autoplay muted class='previewVideo' onended='previewEnded()'><!-- onended属性はvideoタグで使える、イベントハンドラー -->
+                    <img src='$thumbnail' class='previewImage'>
+                    <video autoplay muted class='previewVideo' onended='previewEnded()'>
                         <source src='$preview' type='video/mp4'>
                     </video>
                     <div class='previewOverlay'>

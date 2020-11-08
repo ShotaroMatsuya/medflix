@@ -13,9 +13,9 @@ use PayPal\Api\ShippingAddress;
 
 // Create new agreement
 $agreement = new Agreement();
-$agreement->setName('Subscription to Reeceflix')
-    ->setDescription('£9.99 setup fee and then recurring payments of £9.99 to Reeceflix')
-    ->setStartDate(gmdate("Y-m-d\TH:i:s\Z", strtotime("+1 month", time())));
+$agreement->setName('Medflixを定期購読する(試験運用版)')
+    ->setDescription('加入後1ヶ月後に請求が開始され、その後1ヶ月毎に自動更新されます。')
+    ->setStartDate(date("Y-m-d\TH:i:s\Z", strtotime("+1 month", time())));
 //gmdate関数はdate() 関数と同じですが、返される時刻が グリニッジ標準時 (GMT) であるところが異なります。
 
 // Set plan id

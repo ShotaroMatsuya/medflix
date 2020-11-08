@@ -26,16 +26,17 @@ class Account
         }
         return false;
     }
-    public function register($fn, $ln, $un, $em, $em2, $pw, $pw2)
+    public function register($fn, $ln, $un, $em, $em2, $pw, $pw2, $iS)
     {
         $this->validateFirstName($fn);
         $this->validateLastName($ln);
         $this->validateUsername($un);
         $this->validateEmails($em, $em2);
         $this->validatePasswords($pw, $pw2);
+        $this->validateSubscription($iS);
 
         if (empty($this->errorArray)) {
-            return $this->insertUserDetails($fn, $ln, $un, $em, $pw); //true or false
+            return $this->insertUserDetails($fn, $ln, $un, $em, $pw, $iS); //true or false
         }
         return false;
     }
@@ -53,24 +54,31 @@ class Account
         return false;
     }
 
-    private function insertUserDetails($fn, $ln, $un, $em, $pw)
+    private function insertUserDetails($fn, $ln, $un, $em, $pw, $iS)
     {
         $pw = hash("sha512", $pw); //hash化
 
 
-        $query = $this->con->prepare("INSERT INTO users (firstName,lastName,username,email, password) 
-                                    VALUES (:fn,:ln,:un,:em,:pw)");
+        $query = $this->con->prepare("INSERT INTO users (firstName,lastName,username,email, password,isSubscribed) 
+                                    VALUES (:fn,:ln,:un,:em,:pw,:iS)");
         $query->bindValue(":fn", $fn);
         $query->bindValue(":ln", $ln);
         $query->bindValue(":un", $un);
         $query->bindValue(":em", $em);
         $query->bindValue(":pw", $pw);
+        $query->bindValue(":iS", $iS, PDO::PARAM_INT);
         return $query->execute(); //executeメソッドの返り値はINSERTが成功した場合にtrue、失敗した場合にはfalse
 
         // データベースのdebug↓
         // $query->execute();
         // var_dump($query->errorInfo());
         // return false;
+    }
+    private function validateSubscription($iS)
+    {
+        if (!in_array($iS, ['0', '1'])) {
+            array_push($this->errorArray, Constants::$invalidInput);
+        }
     }
 
     private function validateFirstName($fn)

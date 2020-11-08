@@ -6,8 +6,8 @@
     </div>
     <ul class="navLinks">
         <li><a href="index.php">Home</a></li>
-        <li><a href="shows.php">TV Show</a></li>
-        <li><a href="movies.php">Movies</a></li>
+        <li><a href="shows.php">講義動画</a></li>
+        <li><a href="movies.php">実践動画</a></li>
     </ul>
     <div class="rightItems">
         <a href="search.php">

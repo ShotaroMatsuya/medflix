@@ -41,7 +41,7 @@ function getInputValue($name)
 <html>
 
 <head>
-    <title>Welcome to Reeceflix</title>
+    <title>Welcome to Medflix</title>
     <link rel="stylesheet" type="text/css" href="assets/style/style.css" />
 </head>
 
@@ -50,17 +50,17 @@ function getInputValue($name)
         <div class="column">
             <div class="header">
                 <img src="assets/images/logo.png" title="Logo" alt="Site logo" />
-                <h3>Sign In</h3>
-                <span>to continue to Reeceflix</span>
+                <h3>ログイン</h3>
+                <span>to continue to Medflix</span>
             </div>
             <form method="POST">
                 <?php echo $account->getError(Constants::$loginFailed); ?>
 
                 <input type="text" name="username" placeholder="Username" value="<?php getInputValue("username");  ?>" required>
                 <input type="password" name="password" placeholder="Password" required>
-                <input type="submit" name="submitButton" value="SUBMIT">
+                <input type="submit" name="submitButton" value="ログイン">
             </form>
-            <a href="register.php" class="signInMessage">Need an account ? Sign up here!</a>
+            <a href="register.php" class="signInMessage">アカウントをお持ちでない方はコチラ</a>
 
         </div>
     </div>

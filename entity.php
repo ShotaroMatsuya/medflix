@@ -3,7 +3,7 @@ require_once("includes/header.php");
 
 
 if (!isset($_GET['id'])) {
-    ErrorMessage::show("NO ID passed into page");
+    ErrorMessage::show("idがセットされていません");
 }
 $entityId = $_GET['id'];
 $entity = new Entity($con, $entityId);
@@ -15,4 +15,4 @@ $seasonProvider = new SeasonProvider($con, $userLoggedIn);
 echo $seasonProvider->create($entity);
 
 $categoryContainers = new CategoryContainers($con, $userLoggedIn);
-echo $categoryContainers->showCategory($entity->getCategoryId(), "You might also like");
+echo $categoryContainers->showCategory($entity->getCategoryId(), "あなたにおすすめ");

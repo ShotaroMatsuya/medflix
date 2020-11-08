@@ -30,7 +30,7 @@ class SeasonProvider
                 $videosHtml .= $this->createVideoSquare($video);
             }
             $seasonsHtml .= "<div class='season'>
-                                <h3>Season $seasonNumber</h3>   
+                                <h3>Chapter: $seasonNumber </h3>   
                                 <div class='videos'>
                                     $videosHtml
                                 </div>      

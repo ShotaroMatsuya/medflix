@@ -3,7 +3,7 @@ $hideNav = true; //navBarを非表示に
 require_once("includes/header.php");
 
 if (!isset($_GET['id'])) {
-    ErrorMessage::show("NO ID passed into page");
+    ErrorMessage::show("idがセットされていません");
 }
 // echo "<pre>";
 // var_dump($_GET["id"]);
@@ -11,8 +11,8 @@ if (!isset($_GET['id'])) {
 
 $user = new User($con, $userLoggedIn);
 if (!$user->getIsSubscribed()) {
-    ErrorMessage::show("your must be subscribed to see this.
-                        <a href='profile.php'>Click here to subscribe</a>");
+    ErrorMessage::show("動画をみるには定期購読が必要です。
+                        <a href='profile.php'>定期購読はコチラ</a>");
 }
 
 $video = new Video($con, $_GET["id"]);
@@ -32,7 +32,7 @@ $upNextVideo = VideoProvider::getUpNext($con, $video);
         <div class="upNextContainer">
             <h2>お疲れさまでした</h2>
             <button class="btn btn-primary" data-toggle="modal" data-target="#Modal">
-                確認問題を解く
+                <i class="fas fa-pencil-ruler"></i>確認問題
             </button>
             <h3><?php echo $upNextVideo->getTitle();  ?></h3>
             <h3><?php echo $upNextVideo->getSeasonAndEpisode();  ?></h3>

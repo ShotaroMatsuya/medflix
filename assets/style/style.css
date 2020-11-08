@@ -7,7 +7,7 @@ body {
 
 * {
   font-family: Arial, Helvetica, sans-serif;
-  color: #333;
+  color: rgb(50, 0, 70);
   box-sizing: border-box;
 }
 
@@ -21,17 +21,17 @@ a h3:hover {
 
 a {
   text-decoration: none;
-  color: #0654ba;
+  color: #5fa4ff;
 }
 
 .wrapper {
   min-width: 1050px;
   min-height: 100%;
-  background-color: #141414;
+  background-color: rgb(103, 0, 143);
 }
 
 .signInContainer {
-  background-color: #efefee;
+  background-color: rgb(185, 127, 208);
   height: 100vh;
   display: flex;
   align-items: center;
@@ -109,7 +109,9 @@ a {
   font-weight: 400;
   text-align: center;
 }
-
+.previewImage {
+  display: none;
+}
 .previewImage,
 .previewVideo {
   width: 100%;
@@ -200,7 +202,7 @@ button i {
 }
 
 .previewCategories {
-  padding: 0 50px;
+  padding: 30px 50px;
 }
 
 .errorBanner {
@@ -316,7 +318,7 @@ button i {
   transition: background-color 200ms linear;
 }
 .topBar.scrolled {
-  background-color: #141414;
+  background-color: rgb(79, 0, 111);
   transition: background-color 200ms linear;
 }
 .logoContainer {

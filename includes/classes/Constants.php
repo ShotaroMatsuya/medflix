@@ -1,15 +1,16 @@
 <?php
 class Constants
 {
-    public static $firstNameCharacters = "Your first name must be between 2 and 25 characters";
-    public static $lastNameCharacters = "Your last name must be between 2 and 25 characters";
-    public static $usernameCharacters = "Your username must be between 2 and 25 characters";
-    public static $usernameTaken = "Username already in use";
-    public static $emailsDontMatch = "Your emails don't match";
-    public static $emailInvalid = "Invalid email";
-    public static $emailTaken = "Email already in use";
-    public static $passwordsDontMatch = "Passwords don't match";
-    public static $passwordLength = "Your password must be between 5 and 25 characters";
-    public static $loginFailed = "Your username or password was incorrect";
-    public static $passwordIncorrect = "your old password is incorrect";
+    public static $firstNameCharacters = "first name は2〜25文字以内で入力してください。";
+    public static $lastNameCharacters = "last name は2〜25文字以内で入力してください。";
+    public static $usernameCharacters = "username は2〜25文字以内で入力してください。";
+    public static $usernameTaken = "Username はすでに登録されています。";
+    public static $emailsDontMatch = "入力されたemail が一致しません。";
+    public static $emailInvalid = "無効なemailです。";
+    public static $emailTaken = "Email はすでに使用されています。";
+    public static $passwordsDontMatch = "入力されたPasswords が一致しません";
+    public static $passwordLength = "password は5〜25文字の英数字入力してください。";
+    public static $loginFailed = "username か password が間違っています。";
+    public static $passwordIncorrect = "old password が間違っています。";
+    public static $invalidInput = "不正な入力です。";
 }

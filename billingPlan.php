@@ -22,7 +22,7 @@ $paymentDefinition->setName('レギュラープラン')
     ->setType('REGULAR')
     ->setFrequency('Month')
     ->setFrequencyInterval('1') //毎月請求
-    ->setAmount(new Currency(array('value' =>   1, 000, 'currency' => 'JPY'))); //金額と通貨を設定
+    ->setAmount(new Currency(array('value' =>   1000, 'currency' => 'JPY'))); //金額と通貨を設定
 
 // Set charge models
 // $chargeModel = new ChargeModel();
@@ -30,7 +30,7 @@ $paymentDefinition->setName('レギュラープラン')
 //     ->setAmount(new Currency(array('value' => 10, 'currency' => 'USD')));
 // $paymentDefinition->setChargeModels(array($chargeModel));
 
-$currentUrl = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$currentUrl = "https://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $returnUrl = str_replace("billing.php", "profile.php", $currentUrl); //billing→profileへreplace
 // Set merchant preferences
 $merchantPreferences = new MerchantPreferences();
@@ -39,7 +39,7 @@ $merchantPreferences->setReturnUrl($returnUrl . "?success=true") //成功した�
     ->setAutoBillAmount('yes')
     ->setInitialFailAmountAction('CONTINUE')
     ->setMaxFailAttempts('0')
-    ->setSetupFee(new Currency(array('value' => 1, 000, 'currency' => 'JPY')));
+    ->setSetupFee(new Currency(array('value' => 1000, 'currency' => 'JPY')));
 
 $plan->setPaymentDefinitions(array($paymentDefinition));
 $plan->setMerchantPreferences($merchantPreferences);
@@ -60,7 +60,7 @@ try {
         $plan = Plan::get($createdPlan->getId(), $apiContext);
 
         // Output plan id
-        echo $plan->getId();
+        // echo $plan->getId();
     } catch (PayPal\Exception\PayPalConnectionException $ex) {
         echo $ex->getCode();
         echo $ex->getData();

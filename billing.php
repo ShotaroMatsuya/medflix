@@ -14,7 +14,7 @@ use PayPal\Api\ShippingAddress;
 // Create new agreement
 $agreement = new Agreement();
 $agreement->setName('Medflixを定期購読する(試験運用版)')
-    ->setDescription('加入後1ヶ月後に請求が開始され、その後1ヶ月毎に自動更新されます。')
+    ->setDescription('これは試験運用版です。料金は一切請求されません。')
     ->setStartDate(date("Y-m-d\TH:i:s\Z", strtotime("+1 month", time())));
 //gmdate関数はdate() 関数と同じですが、返される時刻が グリニッジ標準時 (GMT) であるところが異なります。
 
@@ -42,7 +42,7 @@ try {
 
     // Extract approval URL to redirect user
     $approvalUrl = $agreement->getApprovalLink();
-    echo $approvalUrl;
+    // echo "approvalURL:" . $approvalUrl;
     header("Location: $approvalUrl");
 } catch (PayPal\Exception\PayPalConnectionException $ex) {
     echo $ex->getCode();

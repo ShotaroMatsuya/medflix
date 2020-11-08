@@ -64,7 +64,12 @@ function createQuestion() {
             output.textContent = "合格です。お疲れさまでした。";
             again.classList.remove("d-none");
             fin.classList.remove("d-none");
-            setPassed();
+            const timer = setTimeout(()=>{
+
+                setPassed();
+            },500);
+            clearTimeout(timer);
+
         }else{
             output.textContent = "不合格です。もう一度確認しましょう。";
             again.classList.remove("d-none");

@@ -8,7 +8,7 @@ if (isset($_POST["videoId"]) && isset($_POST["username"])) {
     $query->bindValue(":videoId", $_POST["videoId"]);
 
     $query->execute();
-    echo "setPassed successfully!";
+    // echo "setPassed successfully!";
 } else {
     echo "No videoId or username passed into file";
 }

@@ -6,9 +6,13 @@ if (isset($_POST["videoId"]) && isset($_POST["username"])) {
                             WHERE username=:username AND videoId=:videoId");
     $query->bindValue(":username", $_POST["username"]);
     $query->bindValue(":videoId", $_POST["videoId"]);
-
     $query->execute();
-    // echo "setPassed successfully!";
+    // if ($query->execute()) {
+
+    //     echo "setPassed successfully!";
+    // } else {
+    //     echo "fail to update the record!";
+    // }
 } else {
     echo "No videoId or username passed into file";
 }

@@ -55,6 +55,8 @@ function setPassed(){
         }});
 }
 function createQuestion() {
+    let timer;
+    clearTimeout(timer);
     nx.style.display = "none";
     if (game.val + 1 > game.total) {
         message.textContent = 'あなたのスコアは' + game.total + '問中、' + game.score + '点!';
@@ -64,11 +66,14 @@ function createQuestion() {
             output.textContent = "合格です。お疲れさまでした。";
             again.classList.remove("d-none");
             fin.classList.remove("d-none");
-            const timer = setTimeout(()=>{
-
+            // clearTimeout(timer);
+            timer = setTimeout(()=>{
+                // alert("send request setPassed.");
                 setPassed();
-            },500);
-            clearTimeout(timer);
+                
+            },1000);
+
+            
 
         }else{
             output.textContent = "不合格です。もう一度確認しましょう。";
